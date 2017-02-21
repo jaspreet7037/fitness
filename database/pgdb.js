@@ -1,36 +1,45 @@
 import humps from 'humps'
 
 export default (pgPool) => {
+  // queries here
   return {
-    getLinks() {
+    getWorkouts() {
       return pgPool.query(`
-        select * from links
-      `).then(res => humps.camelizeKeys(res.rows))
-    },
-    addLink({ link, linkTitle, createdAt }) {
-      return pgPool.query(`
-        insert into links("link", "link_title", "created_at")
-        values
-        ($1, $2, $3)
-        returning *
-     `, [link, linkTitle, createdAt]).then(res => {
-        return humps.camelizeKeys(res.rows[0])
+      select * from workouts
+      `).then(res => {
+        return humps.camelizeKeys(res.rows)
       })
     },
-    deleteLink({ id }) {
+    getWorkoutsByDate(date) {
       return pgPool.query(`
-      delete from links where id=$1
-      returning *
-      `, [id]).then(res => humps.camelizeKeys(res.rows[0]))
+      select * from workouts
+      where workout_date = $1
+      `, [date]).then(res => {
+        return humps.camelizeKeys(res.rows)
+      })
     },
-    updateLink({ id, link, linkTitle }) {
+    addNewWorkout(
+      {
+        workout, workoutDate, duration, calories, fatBurnTime, fitnessTime, avgHeartRate, maxHeartRate, workoutType
+      }) {
       return pgPool.query(`
-      update links
-      set link=$1,
-          link_title=$2
-      where id=$3
-      returning *
-      `, [link, linkTitle, id]).then(res => humps.camelizeKeys(res.rows[0]))
+        insert into workouts("workout",
+          "workout_date",
+          "duration",
+          "calories",
+          "fat_burn_time",
+          "fitness_time",
+          "avg_heart_rate",
+          "max_heart_rate",
+          "workout_type")
+        values
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        returning *
+      `, [workout, workoutDate, duration, calories, fatBurnTime, fitnessTime, avgHeartRate, maxHeartRate,
+          workoutType]).then(res => {
+        return humps.camelizeKeys(res.rows[0])
+      })
+
     }
   }
 }

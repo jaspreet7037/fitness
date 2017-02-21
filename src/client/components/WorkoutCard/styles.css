@@ -1,0 +1,33 @@
+.workoutContents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calStyle {
+    font-family: 'Droid Serif', serif;
+    font-size: 3em;
+}
+
+.timeStyle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6em;
+}
+
+.heartStyle {
+    color: red;
+    margin-right: 20px;
+}
+
+.heartContent {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hbStyle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6em;
+    color: firebrick;
+}

@@ -1,6 +1,6 @@
 import {
   GraphQLSchema,
-  GraphQLObjectType
+  GraphQLObjectType,
 } from 'graphql'
 
 import storeType from './types/store'

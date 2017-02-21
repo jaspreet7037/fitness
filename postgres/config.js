@@ -1,6 +1,6 @@
 export default {
   development: {
-    database: 'links',
+    database: 'fitness',
     user: 'postgres'
   }
 }

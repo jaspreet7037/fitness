@@ -1,26 +1,31 @@
-import {
-  GraphQLObjectType,
-  GraphQLList
-} from 'graphql'
+import workoutConnection from './workoutConnection'
+import pgdbCreator from '../../database/pgdb'
 import {
   connectionArgs,
   connectionFromPromisedArray,
   globalIdField
 } from 'graphql-relay'
+import {
+  GraphQLObjectType,
+  GraphQLString,
+} from 'graphql'
 
-import linkConnection from './linkConnection'
-import pgdbCreator from '../../database/pgdb'
 
 const storeType = new GraphQLObjectType({
   name: 'Store',
   fields: {
     id: globalIdField("Store"),
-    linkConnection: {
-      type: linkConnection.connectionType,
-      args: connectionArgs,
-      resolve: (obj, args, { pgPool }) => {
+    workoutConnection: {
+      type: workoutConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        date: { type: GraphQLString },
+        query: { type: GraphQLString }
+      },
+      resolve: (obj, args, { unused, pgPool }) => {
         const pgdb = pgdbCreator(pgPool)
-        return connectionFromPromisedArray(pgdb.getLinks(), args)
+        const promisedArray = args.date ? pgdb.getWorkoutsByDate(args.date) : pgdb.getWorkouts()
+        return connectionFromPromisedArray(promisedArray, args)
       }
     }
   }

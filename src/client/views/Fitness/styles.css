@@ -8,9 +8,9 @@
 }
 
 .fitnessCardsContainer {
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
-    width: 920px;
+    max-width: 920px;
     margin: auto;
 }

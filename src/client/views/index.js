@@ -6,19 +6,23 @@ import {
   Route
 } from 'react-router-dom'
 import { FitnessContainer, FitnessRoute } from './Fitness'
+import WorkoutForm from './WorkoutForm'
 
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
         <Router>
-          <Route exact path="/" children={({ match }) => {
-            return match ?
-              <Relay.RootContainer
-                Component={FitnessContainer}
-                route={new FitnessRoute()}
-              /> : null
-          }}/>
+          <div>
+            <Route exact path="/" children={({ match }) => {
+              return match ?
+                <Relay.RootContainer
+                  Component={FitnessContainer}
+                  route={new FitnessRoute()}
+                /> : null
+            }}/>
+            <Route path="/input" component={WorkoutForm}/>
+          </div>
         </Router>
       </MuiThemeProvider>
     )

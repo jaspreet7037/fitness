@@ -1,0 +1,8 @@
+.fitnessBody {
+    display: flex;
+    flex-grow: 1;
+    background-color: #E8DDB5;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+}

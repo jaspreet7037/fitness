@@ -31,3 +31,13 @@
     font-size: 1.6em;
     color: firebrick;
 }
+
+.hbAvgMaxStyle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    margin-top: -20px;
+    margin-bottom: -10px;
+    letter-spacing: 0.1em;
+    margin-left: 60px;
+    color: firebrick;
+}

@@ -2,19 +2,29 @@ import React, { Component } from 'react'
 import Relay from 'react-relay'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 import { PieChart, Pie, Tooltip, Cell } from 'recharts'
-import { heartContent, workoutContents, calStyle, timeStyle, heartStyle, hbStyle } from './styles.css'
+import { heartContent, workoutContents, calStyle, hbAvgMaxStyle, timeStyle, heartStyle, hbStyle } from './styles.css'
 import CountUp from 'react-countup'
 import FontAwesome from 'react-fontawesome'
+import { workoutEnumToDisplay } from '../../util'
 
+function sanitizeTime({ hours, minutes, seconds }) {
+  if (!hours) {
+    hours = 0
+  }
+  if (!minutes) {
+    minutes = 0
+  }
+  if (!seconds) {
+    seconds = 0
+  }
+  return { hours, minutes, seconds }
+}
 
 function getTimeInMinutes({ hours, minutes }) {
   return (hours * 60) + minutes
 }
 
 function getTotalTimeString({ hours, minutes, seconds }) {
-  if (!hours) {
-    hours = 0
-  }
   return `${hours} h  ${minutes} m  ${seconds} s`
 }
 
@@ -22,19 +32,19 @@ class WorkoutCard extends Component {
 
   render() {
     const { workout } = this.props
-    const fitnessTime = getTimeInMinutes(workout.fitnessTime)
-    const fatBurnTime = getTimeInMinutes(workout.fatBurnTime)
-    const timeData = [{ name: 'Fitness Time', value: fitnessTime }, { name: 'Fat Burn Time', value: fatBurnTime }]
+    const fitnessTime = getTimeInMinutes(sanitizeTime(workout.fitnessTime))
+    const fatBurnTime = getTimeInMinutes(sanitizeTime(workout.fatBurnTime))
+    const timeData = [{ name: 'Fitness Minutes', value: fitnessTime }, { name: 'Fat Burn Minutes', value: fatBurnTime }]
     const colors = ['orangered', 'darkorange']
-    const totalTime = getTotalTimeString(workout.duration)
+    const totalTime = getTotalTimeString(sanitizeTime(workout.duration))
     const avgAndMax = `${workout.avgHeartRate} / ${workout.maxHeartRate}`
 
 
     return (
-      <Card>
+      <Card style={{ width: 300 }}>
         <CardHeader
-          title={workout.workout}
-          subtitle={workout.workoutType}
+          title={workoutEnumToDisplay(workout.workout)}
+          subtitle={workout.workoutType === "RES" ? "Resistance" : "Cardio"}
           avatar={
             <FontAwesome
               name={workout.workoutType === "RES" ? 'fire' : 'bolt'}
@@ -62,9 +72,12 @@ class WorkoutCard extends Component {
                 name='heartbeat'
                 size='3x'
               />
-              <span className={hbStyle}>
+              <div className={hbStyle}>
                 { avgAndMax}
-              </span>
+              </div>
+            </div>
+            <div className={hbAvgMaxStyle}>
+              avg / max
             </div>
             <PieChart width={300} height={250}>
               <Pie isAnimationActive={true} data={timeData} cx={150} cy={125} outerRadius={80} fill="#82ca9d" label>

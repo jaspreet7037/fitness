@@ -40,26 +40,25 @@ class Fitness extends Component {
   render() {
     return (
       <div className={styles.fitnessBody}>
-        <div className={styles.fitnessContent}>
-          <div className={styles.mainText}>
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" placeholder="Workout" ref="Workout"/>
-              <input type="text" placeholder="WorkoutDate" ref="WorkoutDate"/>
-              <input type="text" placeholder="Duration" ref="Duration"/>
-              <input type="text" placeholder="Calories" ref="Calories"/>
-              <input type="text" placeholder="FatBurnTime" ref="FatBurnTime"/>
-              <input type="text" placeholder="FitnessTime" ref="FitnessTime"/>
-              <input type="text" placeholder="AvgHeartRate" ref="AvgHeartRate"/>
-              <input type="text" placeholder="MaxHeartRate" ref="MaxHeartRate"/>
-              <input type="text" placeholder="WorkoutType" ref="WorkoutType"/>
-              <button type="submit">Add Workout</button>
-            </form>
-            {
-              this.props.store.workoutConnection.edges.map((edge) => <WorkoutCard key={edge.node.id}
-                id={edge.node.id}
-                                                                                  workout={edge.node}/>)
-            }
-          </div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Workout" ref="Workout"/>
+          <input type="text" placeholder="WorkoutDate" ref="WorkoutDate"/>
+          <input type="text" placeholder="Duration" ref="Duration"/>
+          <input type="text" placeholder="Calories" ref="Calories"/>
+          <input type="text" placeholder="FatBurnTime" ref="FatBurnTime"/>
+          <input type="text" placeholder="FitnessTime" ref="FitnessTime"/>
+          <input type="text" placeholder="AvgHeartRate" ref="AvgHeartRate"/>
+          <input type="text" placeholder="MaxHeartRate" ref="MaxHeartRate"/>
+          <input type="text" placeholder="WorkoutType" ref="WorkoutType"/>
+          <button type="submit">Add Workout</button>
+        </form>
+
+        <div className={styles.fitnessCardsContainer}>
+          {
+            this.props.store.workoutConnection.edges.map((edge) => <WorkoutCard key={edge.node.id}
+                                                                                id={edge.node.id}
+                                                                                workout={edge.node}/>)
+          }
         </div>
       </div>
     )

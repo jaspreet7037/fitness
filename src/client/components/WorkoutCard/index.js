@@ -41,7 +41,7 @@ class WorkoutCard extends Component {
 
 
     return (
-      <Card style={{ width: 300 }}>
+      <Card style={{ width: 300, marginBottom: 10 }}>
         <CardHeader
           title={workoutEnumToDisplay(workout.workout)}
           subtitle={workout.workoutType === "RES" ? "Resistance" : "Cardio"}

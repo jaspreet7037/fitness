@@ -29,12 +29,12 @@ const app = express()
 app.use(compression())
 
 
-app.get('/api/status', (req, res) => res.send({"hello": "world"}))
+app.get('/api/status', (req, res) => res.send({ "hello": "world" }))
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true,
     context: {
-      pgPool
+      pgPool,
     }
   })
 )

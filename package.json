@@ -11,7 +11,7 @@
     "watch:server": "webpack -w --config server.webpack.js & nodemon build/server.js",
     "build:client": "webpack --config client.webpack.js",
     "build:client-prod": "export NODE_ENV=production && webpack -p --config client.webpack.js",
-    "dev": "npm run clean && export NODE_ENV=dev && webpack-dev-server --config client.webpack.js & npm run watch:server",
+    "dev": "npm run build && export NODE_ENV=dev && webpack-dev-server --config client.webpack.js & npm run watch:server",
     "clean": "rimraf build"
   },
   "keywords": [],

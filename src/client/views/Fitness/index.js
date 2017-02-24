@@ -18,40 +18,12 @@ class FitnessRoute extends Relay.Route {
 
 class Fitness extends Component {
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    Relay.Store.update(
-      new CreateWorkoutMutation({
-        workout: this.refs.Workout.value,
-        workoutDate: this.refs.WorkoutDate.value,
-        duration: this.refs.Duration.value,
-        calories: this.refs.Calories.value,
-        fatBurnTime: this.refs.FatBurnTime.value,
-        fitnessTime: this.refs.FitnessTime.value,
-        avgHeartRate: this.refs.AvgHeartRate.value,
-        maxHeartRate: this.refs.MaxHeartRate.value,
-        workoutType: this.refs.WorkoutType.value,
-        store: this.props.store
-      })
-    )
-  }
 
 
   render() {
     return (
       <div className={styles.fitnessBody}>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Workout" ref="Workout"/>
-          <input type="text" placeholder="WorkoutDate" ref="WorkoutDate"/>
-          <input type="text" placeholder="Duration" ref="Duration"/>
-          <input type="text" placeholder="Calories" ref="Calories"/>
-          <input type="text" placeholder="FatBurnTime" ref="FatBurnTime"/>
-          <input type="text" placeholder="FitnessTime" ref="FitnessTime"/>
-          <input type="text" placeholder="AvgHeartRate" ref="AvgHeartRate"/>
-          <input type="text" placeholder="MaxHeartRate" ref="MaxHeartRate"/>
-          <input type="text" placeholder="WorkoutType" ref="WorkoutType"/>
-          <button type="submit">Add Workout</button>
-        </form>
+
 
         <div className={styles.fitnessCardsContainer}>
           {

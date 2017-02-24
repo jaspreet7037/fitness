@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { FitnessContainer, FitnessRoute } from './Fitness'
 import WorkoutForm from './WorkoutForm'
+import Nav from './Navigation'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
       <MuiThemeProvider>
         <Router>
           <div>
+            <Nav/>
             <Route exact path="/" children={({ match }) => {
               return match ?
                 <Relay.RootContainer
